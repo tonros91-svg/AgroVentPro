@@ -1,14 +1,14 @@
 name: Build Android APK
 
 on:
-  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Скачивание файлов проекта
+      - name: Скачивание файлов
         uses: actions/checkout@v4
 
       - name: Настройка Python
@@ -16,7 +16,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Настройка компилятора Flutter
+      - name: Настройка Java (Необходимо для Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Настройка Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
@@ -27,7 +33,6 @@ jobs:
           pip install flet
 
       - name: Сборка Android APK
-        # Собираем приложение с красивыми внутренними названиями
         run: flet build apk --project-name "agrovent" --org "com.agrovent.app"
 
       - name: Выдача готового файла
