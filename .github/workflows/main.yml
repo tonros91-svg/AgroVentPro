@@ -33,8 +33,7 @@ jobs:
           pip install flet
 
       - name: Сборка Android APK
-        run: flet build apk
-
+        run: yes | flet build apk
       - name: Выдача готового файла
         uses: actions/upload-artifact@v4
         with:
