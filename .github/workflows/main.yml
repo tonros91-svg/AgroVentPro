@@ -33,7 +33,7 @@ jobs:
           pip install flet
 
       - name: Сборка Android APK
-        run: flet build apk --project-name "agrovent" --org "com.agrovent.app"
+        run: flet build apk
 
       - name: Выдача готового файла
         uses: actions/upload-artifact@v4
